@@ -55,9 +55,48 @@ class LinkedList {
     get getLastNode() {
         return this.#lastNode();
     }
+
+   set pushNode(data) {
+        if (!Object.keys(this.getList.head).length) {
+            this.getList.head.value = data
+            this.getList.head.next = null
+        } else this.getLastNode.next = {
+              value: data,
+              next: null,
+        };
+    }
+
+   get popNode() {
+        const pop = {
+          ...this.getLastNode
+        };
+
+        delete this.getLastNode.value
+        delete this.getLastNode.next
+
+        let node = this.getFirstNode
+
+        while (Object.keys(node.next).length) {
+            node = node.next
+        }
+
+        node.next = null;
+
+        return pop
+    }
     
     clear() {
         this.data.length = 0
+    }
+
+    displayNodeValues(head = this.getList.head, nodes = "^-->") {
+        if (head.value) nodes += `${head.value}-->`;
+
+        if (!head.next) {
+            return nodes + "$";
+        }
+
+        return this.displayNodeValues(head.next, nodes)
     }
 
     toString() {
@@ -66,6 +105,14 @@ class LinkedList {
 
 }
 
-const linkedList = new LinkedList(1, 22, 23)
-// linkedList.clear()
-console.log(linkedList.getLastNode);
+const linkedList = new LinkedList(1, 2, 3)
+
+linkedList.pushNode = 4
+linkedList.pushNode = 5
+linkedList.pushNode = 6
+
+console.log(linkedList.popNode);
+linkedList.popNode
+
+console.log(linkedList.displayNodeValues())
+console.log(linkedList.toString())

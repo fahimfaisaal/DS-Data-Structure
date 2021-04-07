@@ -42,6 +42,15 @@ class LinkedList {
 		return this.nextNode.next;
 	}
 
+	public Node getFirstNode() {
+		Node firstNode = this.head;
+
+		this.head = firstNode.next;
+		firstNode.next = null;
+
+		return firstNode;
+	}
+
 	public void pushNode(Node node) {
 		this.nextNode.next = node;
 	}
@@ -115,5 +124,9 @@ public class Main {
 		System.out.println(linkedList.toString());
 
 		linkedList.eachValue(10);
+
+		System.out.println(linkedList.getFirstNode().toString());
+
+		System.out.println(linkedList.toString());
 	}
 }

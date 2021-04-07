@@ -23,7 +23,6 @@ class Node {
 class LinkedList {
 	private int listLength;
 	private Node head;
-	private Node nextNode;
 	private final Scanner scan = new Scanner(System.in);
 
 	public LinkedList(int listLength) {
@@ -31,7 +30,15 @@ class LinkedList {
 	}
 
 	public int getListLength() {
-		return this.listLength;
+		Node temp = head;
+		int length = 0;
+
+		if (temp != null) while (temp.next != null) {
+			length++;
+			temp = temp.next;
+		}
+
+		return length;
 	}
 
 	public void setListLength(int length) {
@@ -39,7 +46,13 @@ class LinkedList {
 	}
 
 	public Node getLastNode() {
-		return this.nextNode.next;
+		Node lastNode = this.head;
+
+		if (lastNode.next != null) while (lastNode.next.next != null) {
+			lastNode = lastNode.next;
+		}
+
+		return lastNode;
 	}
 
 	public Node getFirstNode() {
@@ -52,13 +65,14 @@ class LinkedList {
 	}
 
 	public void pushNode(Node node) {
-		this.nextNode.next = node;
+		Node lastNode = this.getLastNode();
+		lastNode.next = node;
 	}
 
 	public Node popNode() {
-		Node lastNode = this.getLastNode();
+		Node lastNode = this.getLastNode().next;
 
-		this.nextNode.next = null;
+		lastNode.next = null;
 
 		return lastNode;
 	}
@@ -69,7 +83,6 @@ class LinkedList {
 			int value = scan.nextInt();
 
 			node.next = new Node(value);
-			this.nextNode = node;
 
 			this.setNode(node.next, len - 1);
 		}
@@ -85,8 +98,10 @@ class LinkedList {
 	}
 
 	public void eachValue(int numOfValue) {
-		if (numOfValue > this.listLength) {
-			numOfValue = this.listLength;
+		int len = this.getListLength();
+
+		if (numOfValue > len) {
+			numOfValue = len;
 		}
 
 		Node temp = this.head;
@@ -98,10 +113,14 @@ class LinkedList {
 		}
 	}
 
+	public void clear() {
+		this.head = null;
+	}
+
 	@Override
 	public String toString() {
 		return "LinkedList {" + '\n' +
-			"head = " + head.toString() + '\n' +
+			"head = " + (head != null ? head.toString() : null) + '\n' +
 		'}';
 	}
 }
@@ -119,14 +138,16 @@ public class Main {
 		System.out.println(linkedList.toString());
 
 		Node lastNode = linkedList.popNode();
+		System.out.println("pop node = " + lastNode);
 		linkedList.pushNode(new Node(6));
 
+		Node firstNode = linkedList.getFirstNode();
+		System.out.println("shift node = " + firstNode);
 		System.out.println(linkedList.toString());
 
 		linkedList.eachValue(10);
 
-		System.out.println(linkedList.getFirstNode().toString());
-
+		linkedList.clear();
 		System.out.println(linkedList.toString());
 	}
 }

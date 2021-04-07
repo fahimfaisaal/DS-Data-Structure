@@ -23,7 +23,7 @@ class Node {
 class LinkedList {
 	private int listLength;
 	private Node head;
-	public Node nextNode;
+	private Node nextNode;
 	private final Scanner scan = new Scanner(System.in);
 
 	public LinkedList(int listLength) {
@@ -56,7 +56,7 @@ class LinkedList {
 
 	private void setNode(Node node, int len) {
 		if (len != 0) {
-			System.out.printf("Enter a node[%d] value: ", this.listLength - len);
+			System.out.printf("Enter a node[%d] value: ", this.listLength - len + 1);
 			int value = scan.nextInt();
 
 			node.next = new Node(value);
@@ -75,6 +75,20 @@ class LinkedList {
 		this.setNode(this.head, this.listLength - 1);
 	}
 
+	public void eachValue(int numOfValue) {
+		if (numOfValue > this.listLength) {
+			numOfValue = this.listLength;
+		}
+
+		Node temp = this.head;
+
+		while(numOfValue != 0) {
+			System.out.println("Value = " + temp.value);
+			temp = temp.next;
+			numOfValue--;
+		}
+	}
+
 	@Override
 	public String toString() {
 		return "LinkedList {" + '\n' +
@@ -87,7 +101,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 
-		System.out.print("Enter The number of nodes: ");
+		System.out.print("Enter The length of linked list: ");
 		int len = scan.nextInt();
 
 		LinkedList linkedList = new LinkedList(len);
@@ -99,5 +113,7 @@ public class Main {
 		linkedList.pushNode(new Node(6));
 
 		System.out.println(linkedList.toString());
+
+		linkedList.eachValue(10);
 	}
 }

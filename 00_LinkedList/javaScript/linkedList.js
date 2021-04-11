@@ -8,10 +8,12 @@ class Node {
 }
 
 class SinglyLinkedList {
-  
+  #head;
+  #tail;
+
   constructor() {
-    this.head = null;
-    this.tail = null;
+    this.#head = null;
+    this.#tail = null;
   }
 
   /**
@@ -21,25 +23,25 @@ class SinglyLinkedList {
   set setNode(nodeData) {
     const node = new Node(nodeData);
 
-    if (this.head === null) {
-      this.head = node;
+    if (this.#head === null) {
+      this.#head = node;
     } else {
-      this.tail.next = node;
+      this.#tail.next = node;
     }
 
-    this.tail = node;
+    this.#tail = node;
   }
 
   get getHead() {
-    return this.head;
+    return this.#head;
   }
 
   get getTail() {
-    return this.tail;
+    return this.#tail;
   }
 
   /**
-   * @param  {Array<any>} data
+   * @param {Array<any>} data
    * @returns {this}
    */
   insertNodes(...data) {
@@ -52,25 +54,37 @@ class SinglyLinkedList {
   }
 
   shiftNode() {
-    const nextNode = this.head.next;
+    const nextNode = this.#head.next;
 
     if (nextNode) {
-      this.head = nextNode;
+      this.#head = nextNode;
     } else {
-      this.head = nextNode;
-      this.tail = nextNode;
+      this.#head = nextNode;
+      this.#tail = nextNode;
     }
+  }
+
+  clear() {
+    this.#head = null;
+    this.#tail = null;
   }
 
   /**
    * @returns {this} in String format
    */
   toString() {
-    return JSON.stringify(this, null, 2);
+    return JSON.stringify({
+      head: this.getHead,
+      tail: this.getTail
+    }, null, 2);
   }
 }
 
 const list = new SinglyLinkedList();
-
+list.insertNodes(0)
 list.insertNodes(1, 2, 3, 4, 5, 6);
+
+console.log(list.toString());
+
+list.clear()
 console.log(list.toString());

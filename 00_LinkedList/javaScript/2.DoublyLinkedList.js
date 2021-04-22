@@ -46,6 +46,56 @@ class DoublyLinkedList {
         this.#tail = node;
         this.#length++;
     }
+
+    insertNodes(...items) {
+        items = typeof items[0] === 'object' ? items.flat() : items;
+
+        return items.reduce((list, data) => {
+            list.setNode = data;
+            
+            return list;
+        }, this);
+    }
+
+    eachData(callBack, len = this.length) {
+        let node = this.getHead;
+        len = len > this.length || len < 0 ? this.length : len;
+
+        for (let i = 0; i < len; i++) {
+            callBack(node.data);
+            node = node.next;
+        }
+    }
+
+    eachNode(callBack, len = this.length) {
+        let node = this.getHead;
+        len = len > this.length || len < 0 ? this.length : len;
+        
+        for (let i = 0; i < len; i++) {
+            callBack(node);
+            node = node.next;
+        }
+    }
+
+    clear() {
+        this.#length = 0;
+        this.#head = 0;
+        this.#tail = 0;
+    }
 }
 
 const list = new DoublyLinkedList();
+
+list.insertNodes(1, 2, 3, 4, 5, 6, 7)
+
+list.eachData(data => {
+    console.log(data)
+})
+
+list.eachNode(node => {
+    console.log(node)
+})
+
+console.log(list.getTail)
+
+list.clear()

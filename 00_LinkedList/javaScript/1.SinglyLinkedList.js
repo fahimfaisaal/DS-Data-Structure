@@ -82,6 +82,34 @@ class SinglyLinkedList {
   }
 
   /**
+   * @param {function} callBack 
+   * @param {number} len 
+   */
+  eachData(callBack, len = this.length) {
+    let node = this.getHead;
+    len = len > this.length || len < 0 ? this.length : len;
+
+    for (let i = 0; i < len; i++) {
+        callBack(node.data);
+         node = node.next;
+    }
+  }
+
+  /**
+   * @param {function} callBack 
+   * @param {number} len 
+   */
+  eachNode(callBack, len = this.length) {
+      let node = this.getHead;
+      len = len > this.length || len < 0 ? this.length : len;
+        
+      for (let i = 0; i < len; i++) {
+          callBack(node);
+          node = node.next;
+      }
+  }
+
+  /**
    * @returns {this} in String format
    */
   toString() {
@@ -96,6 +124,10 @@ class SinglyLinkedList {
 const list = new SinglyLinkedList();
 list.insertNodes(0)
 list.insertNodes(1, 2, 3, 4, 5, 6);
+
+list.eachData(data => {
+  console.log(data);
+})
 
 console.log(list.toString());
 list.clear()

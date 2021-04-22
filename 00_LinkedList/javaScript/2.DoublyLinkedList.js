@@ -57,6 +57,10 @@ class DoublyLinkedList {
         }, this);
     }
 
+    /**
+   * @param {function} callBack 
+   * @param {number} len 
+   */
     eachData(callBack, len = this.length) {
         let node = this.getHead;
         len = len > this.length || len < 0 ? this.length : len;
@@ -67,6 +71,10 @@ class DoublyLinkedList {
         }
     }
 
+  /**
+   * @param {function} callBack 
+   * @param {number} len 
+   */
     eachNode(callBack, len = this.length) {
         let node = this.getHead;
         len = len > this.length || len < 0 ? this.length : len;

@@ -17,16 +17,16 @@ public class SinglyLinkedList {
 		return this.length;
 	}
 
-	public SinglyNode getLastNode() {
+	public SinglyNode getTail() {
 		return this.tail;
 	}
 
-	public SinglyNode getFirstNode() {
+	public SinglyNode getHead() {
 		return this.head;
 	}
 
 	private void pushNode(SinglyNode node) {
-		SinglyNode lastNode = this.getLastNode();
+		SinglyNode lastNode = this.getTail();
 
 		if (lastNode == null) {
 			this.head = node;
@@ -46,20 +46,25 @@ public class SinglyLinkedList {
 
 	public SinglyNode pop() {
 		SinglyNode head = this.head;
-		if (this.length != 0) this.length--;
+		SinglyNode lastNode = this.tail;
 
-		if (head.next == null) {
+		if (head == null) {
+			return null;
+		}
+
+		this.length--;
+
+		if (head.next != null) {
+			while (head.next.next != null) {
+				head = head.next;
+			}
+
+			head.next = null;
+		} else {
 			this.clear();
-			return head;
 		}
 
-		while (head.next.next != null) {
-			head = head.next;
-		}
-
-		SinglyNode lastNode = head.next;
-		head.next = null;
-
+		this.tail = head;
 		return lastNode;
 	}
 

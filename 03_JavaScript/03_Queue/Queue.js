@@ -71,6 +71,23 @@ class Queue {
         return lastNode;
     }
 
+   iterator() {
+        let iterate = this.getHead;
+
+        return {
+            next: () => {
+                const node = iterate;
+
+                iterate = node ? iterate.next : this.getHead;
+
+                return {
+                    done: node === null,
+                    data: node ? node.data : null
+                }
+            }
+        }
+    }
+
     clear() {
         this.#length = 0;
         this.#head = null;
@@ -91,8 +108,30 @@ const queue = new Queue();
 queue.enqueue(1);
 queue.enqueue(2);
 queue.enqueue(3);
-
+queue.enqueue(4);
+queue.enqueue(5);
+queue.enqueue(6);
 
 console.log(queue.toString())
 
-console.log(queue.getTail)
+const firstNode = queue.dequeue(),
+    secondNode = queue.dequeue(),
+    thirdNode = queue.dequeue();
+
+console.log(firstNode, secondNode, thirdNode);
+
+console.log(queue.toString());
+
+const iterateQueue = queue.iterator();
+
+console.log(iterateQueue.next());
+console.log(iterateQueue.next());
+console.log(iterateQueue.next());
+console.log(iterateQueue.next());
+console.log(iterateQueue.next());
+console.log(iterateQueue.next());
+console.log(iterateQueue.next());
+
+queue.clear();
+
+console.log(queue.toString());

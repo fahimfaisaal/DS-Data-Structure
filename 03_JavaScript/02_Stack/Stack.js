@@ -42,43 +42,41 @@ class Stack {
         let head = this.getHead;
         this.#length++;
 
-        if (head !== null) {
-            while (head.next !== null) {
-                head = head.next;
-            }
-
-            head.next = node;
-        } else {
-            this.#head = node;
+        if (head === null) {
+            this.#tail = node;
         }
 
-        this.#tail = node;
+        node.next = head;
+        this.#head = node;
     }
 
     /**
      * @returns {Node}
      */
     pop() {
-        let head = this.getHead;
-        const lastNode = this.getTail;
+        let lastNode = null;
+        const head = this.getHead;
 
         if (head === null) {
-            return head;
+            return lastNode;
         }
 
         this.#length--;
 
         if (head.next === null) {
-            this.clear();
-            return lastNode;
-        }
-        
-        while (head.next.next !== null) {
-            head = head.next;
+            lastNode = head;
+            
+            this.clear()
         }
 
-        this.#tail = head;
-        head.next = null;
+        if (head !== null) {
+            const remainNode = head.next;
+
+            head.next = null;
+            lastNode = head;
+
+            this.#head = remainNode;
+        }
 
         return lastNode;
     }

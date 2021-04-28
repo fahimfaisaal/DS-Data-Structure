@@ -73,6 +73,37 @@ module.exports = class DoublyLinkedList extends SinglyLinkedList {
         return firstNode.data;
     }
 
+    get pollLast() {
+        const lastData = this.getTail?.data;
+        let headNode = this.getHead;
+
+        if (!lastData) {
+        return null;
+        }
+
+        this.#length--;
+
+        if (headNode.next === null) {
+            this.clear();
+            return headNode.data;
+        }
+
+        while (headNode.next.next !== null) {
+        headNode = headNode.next;
+        }
+
+        this.#tail = headNode;
+        headNode.next = null;
+
+        return lastData;
+    }
+
+    clear() {
+        this.#length = 0;
+        this.#head = 0;
+        this.#tail = 0;
+    }
+
     toString() {
         return JSON.stringify({
             length: this.length,

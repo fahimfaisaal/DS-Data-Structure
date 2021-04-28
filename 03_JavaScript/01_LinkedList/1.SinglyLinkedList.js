@@ -1,6 +1,6 @@
 console.clear();
 const Iterate = require('../iterate');
-class SinglyNode {
+class SinglyNNode {
   constructor(nodeData) {
     this.data = nodeData;
     this.next = null;
@@ -58,7 +58,7 @@ module.exports = class SinglyLinkedList extends Iterate {
   }
 
   set addFirst(data) {
-    const newNode = new SinglyNode(data);
+    const newNode = new SinglyNNode(data);
     this.#length++;
 
     newNode.next = this.getHead;
@@ -67,7 +67,7 @@ module.exports = class SinglyLinkedList extends Iterate {
   }
 
   set addLast(data) {
-    const newNode = new SinglyNode(data);
+    const newNode = new SinglyNNode(data);
     let headNode = this.getHead;
 
     this.#length++;
@@ -78,7 +78,11 @@ module.exports = class SinglyLinkedList extends Iterate {
       return;
     }
 
-    this.#tail.next = newNode;
+    while (headNode.next !== null) {
+      headNode = headNode.next;
+    }
+
+    headNode.next = newNode;
     this.#tail = newNode;
   }
 

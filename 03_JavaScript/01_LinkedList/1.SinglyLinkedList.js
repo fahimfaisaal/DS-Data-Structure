@@ -1,40 +1,22 @@
 console.clear();
-
-class Node {
+const Iterate = require('../iterate');
+class SinglyNode {
   constructor(nodeData) {
     this.data = nodeData;
     this.next = null;
   }
 }
 
-class SinglyLinkedList {
+module.exports = class SinglyLinkedList extends Iterate {
   #length;
   #head;
   #tail;
 
   constructor() {
+    super();
     this.#length = 0;
     this.#head = null;
     this.#tail = null;
-  }
-
-  /**
-   * @param {any} nodeData
-   * @returns {undefined}
-   */
-  set setNode(nodeData) {
-    const node = new Node(nodeData);
-
-    if (this.#head) {
-      this.#tail.next = node;
-    }
-
-    if (this.#head === null) {
-      this.#head = node;
-    }
-
-    this.#tail = node;
-    this.#length++;
   }
 
   get length() {
@@ -53,60 +35,110 @@ class SinglyLinkedList {
    * @param {Array<any>} data
    * @returns {this}
    */
-  insertNodes(...data) {
+  addLastAll(...data) {
     data = typeof data[0] === "object" ? data.flat() : data;
 
     return data.reduce((list, value) => {
-      this.setNode = value;
+      this.addLast = value;
       return list;
     }, this);
   }
 
-  shiftNode() {
-    const nextNode = this.#head.next;
+  /**
+   * @param {Array<any>} data
+   * @returns {this}
+   */
+  addFirstAll(...data) {
+    data = typeof data[0] === "object" ? data.flat() : data;
 
-    if (nextNode) {
-      this.#head = nextNode;
-    } else {
-      this.#head = nextNode;
-      this.#tail = nextNode;
-    }
+    return data.reduce((list, value) => {
+      this.addFirst = value;
+      return list;
+    }, this);
+  }
+
+  set addFirst(data) {
+    const newNode = new SinglyNode(data);
+    this.#length++;
+
+    newNode.next = this.getHead;
+
+    this.#head = newNode;
+  }
+
+  set addLast(data) {
+    const newNode = new SinglyNode(data);
+    let headNode = this.getHead;
 
     this.#length++;
+
+    if (headNode === null) {
+      this.#head = newNode;
+      this.#tail = newNode;
+      return;
+    }
+
+    this.#tail.next = newNode;
+    this.#tail = newNode;
+  }
+
+  get pollFirst() {
+    const firstData = this.getHead?.data;
+
+    if (firstData === undefined) {
+      return null;
+    }
+
+    this.#length--;
+
+    this.#head = this.#head.next;
+
+    return firstData;
+  }
+
+  get pollLast() {
+    const lastData = this.getTail?.data;
+    let headNode = this.getHead;
+
+    if (!lastData) {
+      return null;
+    }
+
+    this.#length--;
+
+    if (headNode.next === null) {
+      this.clear();
+      return headNode.data;
+    }
+
+    while (headNode.next.next !== null) {
+      headNode = headNode.next;
+    }
+
+    this.#tail = headNode;
+    headNode.next = null;
+
+    return lastData;
+  }
+
+  /**
+   * @param {number} index 
+   * @returns data
+   */
+  get(index) {
+    const item = this.toArray()[index]
+
+    if (item === undefined) {
+      return null;
+    }
+
+    return item;
   }
 
   clear() {
     this.#length = 0;
     this.#head = null;
     this.#tail = null;
-  }
-
-  /**
-   * @param {function} callBack 
-   * @param {number} len 
-   */
-  eachData(callBack, len = this.length) {
-    let node = this.getHead;
-    len = len > this.length || len < 0 ? this.length : len;
-
-    for (let i = 0; i < len; i++) {
-        callBack(node.data);
-         node = node.next;
-    }
-  }
-
-  /**
-   * @param {function} callBack 
-   * @param {number} len 
-   */
-  eachNode(callBack, len = this.length) {
-      let node = this.getHead;
-      len = len > this.length || len < 0 ? this.length : len;
-        
-      for (let i = 0; i < len; i++) {
-          callBack(node);
-          node = node.next;
-      }
   }
 
   /**
@@ -120,15 +152,3 @@ class SinglyLinkedList {
     }, null, 2);
   }
 }
-
-const list = new SinglyLinkedList();
-list.insertNodes(0)
-list.insertNodes(1, 2, 3, 4, 5, 6);
-
-list.eachData(data => {
-  console.log(data);
-})
-
-console.log(list.toString());
-list.clear()
-console.log(list.toString());

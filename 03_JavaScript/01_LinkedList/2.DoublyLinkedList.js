@@ -1,19 +1,20 @@
 console.clear();
-
-class Node {
+const SinglyLinkedList = require('./1.SinglyLinkedList');
+class DoublyNode {
     constructor(nodeData) {
-        this.data = nodeData;
         this.previous = null;
+        this.data = nodeData;
         this.next = null;
     }
 }
 
-class DoublyLinkedList {
+module.exports = class DoublyLinkedList extends SinglyLinkedList {
     #head;
     #tail;
     #length;
 
     constructor() {
+        super();
         this.#length = 0;
         this.#head = null;
         this.#tail = null;
@@ -31,79 +32,58 @@ class DoublyLinkedList {
        return this.#length;
     }
 
-    set setNode(data) {
-        const node = new Node(data)
-
-        if (this.#head) {
-            this.#tail.next = node;
-            this.#tail.next.previous = this.#head;
-        }
-
-        if (this.#head === null) {
-            this.#head = node;
-        }
-
-        this.#tail = node;
+    set addFirst(data) {
+        const newNode = new DoublyNode(data);
         this.#length++;
-    }
 
-    insertNodes(...items) {
-        items = typeof items[0] === 'object' ? items.flat() : items;
-
-        return items.reduce((list, data) => {
-            list.setNode = data;
-            
-            return list;
-        }, this);
-    }
-
-    /**
-   * @param {function} callBack 
-   * @param {number} len 
-   */
-    eachData(callBack, len = this.length) {
-        let node = this.getHead;
-        len = len > this.length || len < 0 ? this.length : len;
-
-        for (let i = 0; i < len; i++) {
-            callBack(node.data);
-            node = node.next;
-        }
-    }
-
-  /**
-   * @param {function} callBack 
-   * @param {number} len 
-   */
-    eachNode(callBack, len = this.length) {
-        let node = this.getHead;
-        len = len > this.length || len < 0 ? this.length : len;
         
-        for (let i = 0; i < len; i++) {
-            callBack(node);
-            node = node.next;
-        }
+        newNode.next = this.getHead;
+        this.#head = newNode;
+        this.#head.next.previous = this.getHead
     }
 
-    clear() {
-        this.#length = 0;
-        this.#head = 0;
-        this.#tail = 0;
+    set addLast(data) {
+        const newNode = new DoublyNode(data);
+        this.#length++;
+
+        if (this.getHead === null) {
+            this.#head = newNode;
+            this.#tail = newNode;
+            return;
+        }
+
+        newNode.previous = this.getTail;
+
+        this.#tail.next = newNode;        
+        this.#tail = newNode;
+    }
+
+    get pollFirst() {
+        const firstNode = this.getHead
+
+        if (firstNode === null) {
+            return null;
+        }
+
+        this.#length--;
+
+        this.#head = this.#head.next;
+        this.#head.previous = null;
+
+        return firstNode.data;
+    }
+
+    toString() {
+        return JSON.stringify({
+            length: this.length,
+            head: this.getHead,
+            tail: this.getTail
+        }, (key, value) => {
+            if (key == 'previous' && value !== null) {
+                return value.data;
+            }
+
+            return value;
+        }, 2)
     }
 }
-
-const list = new DoublyLinkedList();
-
-list.insertNodes(1, 2, 3, 4, 5, 6, 7)
-
-list.eachData(data => {
-    console.log(data)
-})
-
-list.eachNode(node => {
-    console.log(node)
-})
-
-console.log(list.getTail)
-
-list.clear()

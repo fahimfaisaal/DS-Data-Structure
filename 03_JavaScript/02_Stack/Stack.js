@@ -1,5 +1,7 @@
 console.clear();
 
+const Iterate = require('../iterate');
+
 class Node {
     constructor(data) {
         this.data = data;
@@ -11,7 +13,7 @@ class Node {
     }
 }
 
-class Stack {
+class Stack extends Iterate {
     #length;
     #head;
     #tail;
@@ -81,24 +83,6 @@ class Stack {
         return lastNode;
     }
 
-    
-    iterator() {
-        let iterate = this.getHead;
-        
-        return {
-            next: () => {
-                const node = iterate;
-                
-                iterate = node !== null ? iterate.next : this.getHead;
-                
-                return {
-                    done: node === null,
-                    data: node ? node.data : null
-                }
-            }
-        }
-    }
-    
     clear() {
         this.#length = 0;
         this.#head = null;

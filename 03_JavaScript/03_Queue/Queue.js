@@ -1,3 +1,6 @@
+console.clear();
+
+const Iterate = require('../iterate');
 class Node {
     constructor(data) {
         this.data = data;
@@ -9,7 +12,7 @@ class Node {
     }
 }
 
-class Queue {
+class Queue extends Iterate {
     #length;
     #head;
     #tail;
@@ -69,23 +72,6 @@ class Queue {
         this.#tail = head;
 
         return lastNode;
-    }
-
-   iterator() {
-        let iterate = this.getHead;
-
-        return {
-            next: () => {
-                const node = iterate;
-
-                iterate = node ? iterate.next : this.getHead;
-
-                return {
-                    done: node === null,
-                    data: node ? node.data : null
-                }
-            }
-        }
     }
 
     clear() {

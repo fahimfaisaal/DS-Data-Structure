@@ -1,4 +1,5 @@
 console.clear();
+
 const Iterate = require('../iterate');
 class SinglyNNode {
   constructor(nodeData) {
@@ -7,7 +8,7 @@ class SinglyNNode {
   }
 }
 
-module.exports = class SinglyLinkedList extends Iterate {
+class SinglyLinkedList extends Iterate {
   #length;
   #head;
   #tail;
@@ -156,3 +157,5 @@ module.exports = class SinglyLinkedList extends Iterate {
     }, null, 2);
   }
 }
+
+module.exports = SinglyLinkedList;

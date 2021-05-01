@@ -8,7 +8,7 @@ class DoublyNode {
     }
 }
 
-module.exports = class DoublyLinkedList extends SinglyLinkedList {
+class DoublyLinkedList extends SinglyLinkedList {
     #head;
     #tail;
     #length;
@@ -36,7 +36,6 @@ module.exports = class DoublyLinkedList extends SinglyLinkedList {
         const newNode = new DoublyNode(data);
         this.#length++;
 
-        
         newNode.next = this.getHead;
         this.#head = newNode;
         this.#head.next.previous = this.getHead
@@ -78,7 +77,7 @@ module.exports = class DoublyLinkedList extends SinglyLinkedList {
         let headNode = this.getHead;
 
         if (!lastData) {
-        return null;
+            return null;
         }
 
         this.#length--;
@@ -89,7 +88,7 @@ module.exports = class DoublyLinkedList extends SinglyLinkedList {
         }
 
         while (headNode.next.next !== null) {
-        headNode = headNode.next;
+            headNode = headNode.next;
         }
 
         this.#tail = headNode;
@@ -118,3 +117,5 @@ module.exports = class DoublyLinkedList extends SinglyLinkedList {
         }, 2)
     }
 }
+
+module.exports = DoublyLinkedList;

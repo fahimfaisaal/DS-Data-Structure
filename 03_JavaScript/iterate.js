@@ -1,4 +1,4 @@
-module.exports = class Iterate {
+class Iterate {
     iterator() {
         let iterate = this.getHead;
 
@@ -35,3 +35,5 @@ module.exports = class Iterate {
         return array;
     }
 }
+
+module.exports = Iterate

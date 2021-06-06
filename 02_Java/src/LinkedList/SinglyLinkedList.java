@@ -2,10 +2,10 @@ package LinkedList;
 
 import java.util.Scanner;
 
-public class SinglyLinkedList {
+public class SinglyLinkedList<T> {
 	private int length = 0;
-	private SinglyNode head;
-	private SinglyNode tail;
+	private SinglyNode<T> head;
+	private SinglyNode<T> tail;
 	private final Scanner scan = new Scanner(System.in);
 
 	public SinglyLinkedList() {
@@ -17,16 +17,16 @@ public class SinglyLinkedList {
 		return this.length;
 	}
 
-	public SinglyNode getTail() {
+	public SinglyNode<T> getTail() {
 		return this.tail;
 	}
 
-	public SinglyNode getHead() {
+	public SinglyNode<T> getHead() {
 		return this.head;
 	}
 
-	private void pushNode(SinglyNode node) {
-		SinglyNode lastNode = this.getTail();
+	private void pushNode(SinglyNode<T> node) {
+		SinglyNode<T> lastNode = this.getTail();
 
 		if (lastNode == null) {
 			this.head = node;
@@ -37,16 +37,16 @@ public class SinglyLinkedList {
 		this.tail = node;
 	}
 
-	public void push(int number) {
-		SinglyNode node = new SinglyNode(number);
+	public void push(T number) {
+		SinglyNode<T> node = new SinglyNode<>(number);
 
 		this.pushNode(node);
 		this.length++;
 	}
 
-	public SinglyNode pop() {
-		SinglyNode head = this.head;
-		SinglyNode lastNode = this.tail;
+	public SinglyNode<T> pop() {
+		SinglyNode<T> head = this.head;
+		SinglyNode<T> lastNode = this.tail;
 
 		if (head == null) {
 			return null;
@@ -75,7 +75,7 @@ public class SinglyLinkedList {
 			numOfValue = len;
 		}
 
-		SinglyNode temp = this.head;
+		SinglyNode<T> temp = this.head;
 
 		while(numOfValue != 0) {
 			System.out.println("Value = " + temp.value);

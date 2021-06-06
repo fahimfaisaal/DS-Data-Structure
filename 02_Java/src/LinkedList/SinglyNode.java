@@ -1,10 +1,10 @@
 package LinkedList;
 
-public class SinglyNode {
-	public final int value;
-	public SinglyNode next;
+public class SinglyNode<T> {
+	public final T value;
+	public SinglyNode<T> next;
 
-	public SinglyNode(int data) {
+	public SinglyNode(T data) {
 		this.value = data;
 		this.next = null;
 	}

@@ -1,4 +1,4 @@
-package LinkedList.SinglyLinkedList;
+package LinkedList;
 
 public class SinglyNode {
 	public final int value;

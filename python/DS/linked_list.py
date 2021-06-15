@@ -3,6 +3,7 @@ import json
 
 
 class Linkedlist:
+
     def __init__(self):
         self.length = 0
         self.head: object = None
@@ -17,7 +18,7 @@ class Linkedlist:
     def get_tail(self) -> object:
         return self.tail
 
-    def add_first(self, data: any) -> None:
+    def add_first(self, data: any) -> object:
         new_node = node.Node(data)
 
         self.length += 1
@@ -31,7 +32,9 @@ class Linkedlist:
         new_node.next = head
         self.head = new_node
 
-    def add_last(self, data: any) -> None:
+        return self
+
+    def add_last(self, data: any) -> object:
         new_node = node.Node(data)
 
         self.length += 1
@@ -44,6 +47,30 @@ class Linkedlist:
         self.tail.next = new_node
 
         self.tail = new_node
+
+        return self
+
+    def add(self, index: int, data: any) -> object:
+        if index >= self.length:
+            self.add_last(data)
+        elif index <= 0:
+            self.add_first(data)
+        else:
+            new_node = node.Node(data)
+            i = 0
+            head = self.head
+
+            while i != index - 1:
+                head = head.next
+                i += 1
+
+            remain_nodes = head.next
+            head.next = new_node
+            head.next.next = remain_nodes
+
+            self.length += 1
+
+        return self
 
     def pull_first(self) -> object:
         if self.head is None:
@@ -80,7 +107,28 @@ class Linkedlist:
 
         return last_node
 
-    # TODO: have to implement add(), set(), remove(), get()
+    def pull(self, index: int) -> object:
+        if index <= 0:
+            return self.pull_first()
+
+        if index >= self.length:
+            return self.pull_last()
+
+        each_node = self.head
+
+        i = 0
+        while i != index - 1:
+            each_node = each_node.next
+            i += 1
+
+        need_node = each_node.next
+        remain_node = each_node.next.next
+
+        each_node.next = remain_node
+
+        need_node.next = None
+
+        return need_node
 
     def clear(self) -> None:
         self.length = 0
@@ -88,7 +136,7 @@ class Linkedlist:
         self.tail = None
 
     # this method will return deep clone
-    def clone_deep(self) -> object:
+    def clone(self) -> object:
         clone_linked_list: object = Linkedlist()
         items: list = self.to_list()
 
@@ -98,7 +146,7 @@ class Linkedlist:
         return clone_linked_list
 
     # this method will return shallow clone
-    def clone(self):
+    def copy(self):
         return self
 
     def to_list(self) -> list:

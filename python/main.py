@@ -1,5 +1,6 @@
 from DS import linked_list
 from DS import stack
+from DS import queue
 from DS import set
 import os
 
@@ -35,16 +36,27 @@ if __name__ == '__main__':
     print(my_list.to_list())
     print(set.Set(my_list.to_list()).get_set())
 
-    my_stack = stack.Stack()
+    # my_stack = stack.Stack()
+    #
+    # my_stack.push(10)
+    # my_stack.push(20)
+    # my_stack.push(30)
+    #
+    # print(my_stack.pop())
+    # print(my_stack.pop())
+    #
+    # print(my_stack.to_list())
 
-    my_stack.push(10)
-    my_stack.push(20)
-    my_stack.push(30)
+    my_queue = queue.Queue()
 
-    print(my_stack.pop())
-    print(my_stack.pop())
+    my_queue.push(10)
+    my_queue.push(20).push(30).push(40)
 
-    print(my_stack.to_list())
+    print(my_queue.to_list())
+    print("shift data:", my_queue.shift())
+    print(my_queue.to_list())
+
+
 
 
 

@@ -1,11 +1,14 @@
 const SinglyLinkedList = require('./1.SinglyLinkedList');
 const DoublyLinkedList = require('./2.DoublyLinkedList');
 
-// const singlyList = new SinglyLinkedList();
-// singlyList.addLastAll(0)
-// singlyList.addLastAll(1, 2, 3, 4, 5, 6);
+const singlyList = new SinglyLinkedList();
+singlyList.addLastAll(0)
+singlyList.addLastAll(1, 2, 3, 4, 5, 6);
 
-// console.log(singlyList.toString());
+console.log("last item: ", singlyList.pollLast)
+console.log("last item: ", singlyList.pollLast)
+
+console.log(singlyList.toString());
 
 // const Iterator = singlyList.iterator();
 

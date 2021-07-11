@@ -8,7 +8,7 @@ class Queue:
         self.head = None
         self.tail = None
 
-    def shift(self) -> any:
+    def enqueue(self) -> any:
         if self.head is None:
             return None
 
@@ -19,7 +19,7 @@ class Queue:
 
         return first_node.data
 
-    def push(self, data) -> object:
+    def dequeue(self, data) -> object:
         new_node = node.Node(data)
         self.length += 1
 

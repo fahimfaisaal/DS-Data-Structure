@@ -87,7 +87,13 @@ public class Main {
         TreeNode<Integer> two = tree.appendLeft(seven, 2);
         TreeNode<Integer> five = tree.appendRight(seven, 5);
 
-        System.out.println(tree);
+//        System.out.println(tree);
 
+        TreeNode<Integer> removeData = seven.removeLeft();
+        System.out.println(tree);
+        // clear the tree
+        tree = tree.clear();
+
+        System.out.println(tree);
     }
 }

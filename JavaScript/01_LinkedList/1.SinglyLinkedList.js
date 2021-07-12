@@ -159,7 +159,3 @@ class SinglyLinkedList extends Iterate {
 }
 
 module.exports = SinglyLinkedList;
-
-// toString() {
-//   return JSON.stringify(this, null, 2)
-// }
